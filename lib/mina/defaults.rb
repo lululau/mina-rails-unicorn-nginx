@@ -15,13 +15,6 @@ task :defaults do
   set_default :config_templates_path, "lib/mina/templates"
   set_default :config_path,     "#{deploy_to}/#{shared_path}/config"
   
-  set_default :god_script,      "#{services_path!}/god"
-  set_default :god_global,      "#{config_path}/global.god"
-  set_default :god_unicorn,     "#{config_path}/god/unicorn.god"
-  set_default :god_bin,         "#{deploy_to}/#{current_path}/bin/god"
-  set_default :god_user,        user
-  set_default :god_group,       user
-  
   set_default :unicorn_socket,  "#{sockets_path}/unicorn.sock"
   set_default :unicorn_pid,     "#{pids_path}/unicorn.pid"
   set_default :unicorn_config,  "#{config_path}/unicorn.rb"

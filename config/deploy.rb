@@ -6,7 +6,6 @@ require 'mina/rvm'
 
 require 'mina/defaults'
 require 'mina/extras'
-require 'mina/god'
 require 'mina/unicorn'
 require 'mina/nginx'
 

@@ -7,7 +7,7 @@ namespace :env do
     set :port,                '2222'
     set :rvm_path,            '/etc/profile.d/rvm.sh'
     set :rvm_string,          '1.9.3'
-    set :services_path,       '/etc/init.d'         # where your God and Unicorn service control scripts will go
+    set :services_path,       '/etc/init.d'         # where your Unicorn service control scripts will go
     set :nginx_path,          '/etc/nginx'
     set :deploy_server,       'vagrant'             # just a handy name of the server
     invoke :defaults                                # load rest of the config

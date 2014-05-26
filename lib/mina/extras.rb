@@ -1,7 +1,5 @@
 task :setup do
   invoke :create_extra_paths
-  invoke :'god:setup'
-  invoke :'god:upload'
   invoke :'unicorn:upload'
   invoke :'nginx:upload'
 
@@ -15,7 +13,6 @@ end
 desc 'Invoke setup tasks, that requires sudo privileges'
 task :sudo_setup do
   invoke :sudo
-  invoke :'god:link'
   invoke :'unicorn:link'
   invoke :'nginx:setup'
   invoke :'nginx:link'
@@ -38,7 +35,7 @@ task :create_extra_paths do
 end
 
 task :health do
-  queue 'ps aux | grep -v grep | grep -v bash | grep -e "bin\/god" -e "unicorn_rails" -e "mongod" -e "nginx" -e "redis" -e "STAT START   TIME COMMAND" -e "bash"'
+  queue 'ps aux | grep -v grep | grep -v bash | grep -e "unicorn_rails" -e "mongod" -e "nginx" -e "redis" -e "STAT START   TIME COMMAND" -e "bash"'
 end
 
 task :sudo do

@@ -1,9 +1,9 @@
-# Mina + Rails + Unicorn + nginx + God
+# Mina + Rails + Unicorn + nginx
 ======================================
 
 An example deployment configuration using [Mina](https://github.com/nadarei/mina) for deployment.
 
-Deploys and updates Rails application and config files for [Unicorn](http://unicorn.bogomips.org/), [nginx](http://wiki.nginx.org/Main), and [God](http://godrb.com/).
+Deploys and updates Rails application and config files for [Unicorn](http://unicorn.bogomips.org/), [nginx](http://wiki.nginx.org/Main).
 
 Why?
 ----
@@ -37,7 +37,6 @@ mina init
 mina setup          # Set up deploy server with paths, configs, etc. Requires sudo privileges or sudoer user
 mina deploy
 mina nginx:restart  # or nginx:start
-mina god:start      # it will also run unicorn automagically
 ```
 You should be up and running now. Yay!
 
@@ -48,7 +47,6 @@ mina init to=production
 mina setup to=production
 mina deploy to=production
 mina nginx:restart to=production
-mina god:start to=production
 ```
 
 `mina deploy to=production` sounds just right. :) Thanks [@rstacruz](http://github.com/rstacruz) for the hint!
@@ -57,8 +55,6 @@ You can, of course, set the :default_server to anything you like.
 `setup` task also invokes these additional tasks:
 ```bash
 create_extra_paths
-god:setup
-god:upload
 unicorn:upload
 nginx:upload
 ```
@@ -66,7 +62,6 @@ nginx:upload
 and if you don't set separate sudoer user, these tasks invoked as well, implying that current user have sudo rights (if he doesn't, you'll be prompted to run 'sudo_setup' task, which does exactly that):
 
 ```bash
-god:link
 unicorn:link
 nginx:setup
 nginx:link
@@ -77,11 +72,7 @@ You can, of course, run them one by one. And you will eventually do so, if you f
 What now?
 ---------
 
-You can check God status:
-
-    mina god:status
-
-...or overall processes' status/health:
+overall processes' status/health:
 
     mina health
 
@@ -93,13 +84,12 @@ To deploy next release, just run
 
     mina deploy
 
-If you've changed some of the config files for god/unicorn/nginx, you can upload them to server with `mina config:upload`.
+If you've changed some of the config files for unicorn/nginx, you can upload them to server with `mina config:upload`.
 
-If changed code includes unicorn or god control script (service), you will also need to run `mina config:link`, that requires sudo privileges. Keep in mind, that any nginx controlling task also requires sudo! Those are: stop, start, restart, reload, and status.
+If changed code includes unicorn, you will also need to run `mina config:link`, that requires sudo privileges. Keep in mind, that any nginx controlling task also requires sudo! Those are: stop, start, restart, reload, and status.
 
-Individual tasks are also available, like `god:upload`, or `unicorn:link`.
+Individual tasks are also available, like `unicorn:link`.
 
-You can as well run `mina god:parse:unicorn` to see how god's unicorn config file will look like without uploading it to server. Very useful for debugging!
 
 Just check out task files under lib/mina directory, most of the code there is quite self-explanatory!
     
